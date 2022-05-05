@@ -1,0 +1,49 @@
+<%- include("partials/header"); -%>
+<link rel="stylesheet" href="/css/custyle.css">
+<h1>Parking Shared </h1>
+<p> <%= %> </p>
+
+<style media="screen">
+  @media (min-width: 950px) {
+      .row1-container {
+          display: block;
+          justify-content: center;
+          align-items: center;
+      }
+
+      .row2-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      .box-down {
+          position: relative;
+          top: 150px;
+      }
+      .box {
+          width: 20%;
+
+      }
+      .header p {
+          width: 30%;
+      }
+
+  }
+
+</style>
+
+
+<form class="" action="/map" method="post">
+  <%  posts.forEach(function(post){%>
+  <div class="box red">
+    <h2><%=post.title%></h2>
+    <p>
+      <a href="/posts/<%=post._id%>">Read More</a>
+    </p>
+    <img src="https://assets.codepen.io/2301174/icon-team-builder.svg" alt="">
+  </div>
+  <%})%>
+
+
+</form>
+<%- include("partials/footer"); -%>
