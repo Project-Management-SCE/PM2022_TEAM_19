@@ -30,16 +30,17 @@
 
 
 
-<form class="" action="/map" method="post">
+<form class="" action="/sort" method="post">
   <% result.forEach(function(r) {%>
   <div class="box red">
-    <h2><%=r.status%></h2>
-    <h3><%= r.title%></h3>
-    <h4> <%= r.description%></h4><br>
-    <h4> <%= r.address%></h4><br>
-    <h4> <%= r.type%></h4><br>
-    <h4> <%= r.price%> per HOUR</h4>
-    <img src="https://assets.codepen.io/2301174/icon-team-builder.svg" alt="">
+    <h2 name ="status"><%=r.status%></h2>
+    <h3 name ="title"><%= r.title%></h3>
+    <h4 name ="description"> <%= r.description%></h4><br>
+    <h4 name ="address"> <%= r.address%></h4><br>
+    <h4 name ="type"> <%= r.type%></h4><br>
+    <h4 name ="price"> <%= r.price%>₪ per Hour</h4>
+  <!-- <img src="https://assets.codepen.io/2301174/icon-team-builder.svg" alt=""> -->
+    <button class="next round nextbutton" type="submit" name="add">Add to cart</button>
   </div>
   <%})%>
 
