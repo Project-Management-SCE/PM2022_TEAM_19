@@ -110,6 +110,15 @@ app.get("/sort", function(req ,res){
 
 });
 
+app.post("/sort", function(req ,res){
+  Parking.find({address:SearchLocation}, function(err, items){
+  res.render("cart" ,
+  { carditems : items
+  });
+})
+
+});
+
 app.post("/map", function(req, res) {
     SearchLocation = req.body.place
     Parking.find({address: req.body.place}, function(err, posts){
@@ -137,7 +146,7 @@ app.post("/unavailable" , function(req , res){
 });
 
 app.post("/regular" , function(req , res){
-   Parking.find({status : "Regular" , address: SearchLocation}, function(err , posts){
+   Parking.find({type : "Regular" , address: SearchLocation}, function(err , posts){
     res.render("sort", {
       result : posts
     });
@@ -151,6 +160,14 @@ app.post("/disabled" , function(req , res){
     });
   });
 });
+
+//cart functions
+app.get("/cart", function(req,res){
+  res.render("cart");
+});
+
+
+
 
 
 app.get("/", function(req, res) {
@@ -204,11 +221,11 @@ app.post('/login', function(req, res) {
       if (req.body.password === user.password) {
 
         if (user.isOwner === "on") {
-          res.redirect("/ownerPage");
+          res.redirect("/ownerPage", {userName : req.body.username});
         } else if (user.isAdmin === "on") {
-          res.redirect("/adminPage");
+          res.redirect("/adminPage" , {userName : req.body.username});
         } else {
-          res.redirect("/customerPage");
+          res.redirect("/customerPage", {userName : req.body.username});
         }
       } else {
         req.flash("message", "paswword not match!");
@@ -369,6 +386,10 @@ app.get("/about", function(req, res) {
   });
 });
 
+
+
+
+
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next()
@@ -383,6 +404,7 @@ function checkNotAuthenticated(req, res, next) {
   }
   next()
 }
+
 
 
 

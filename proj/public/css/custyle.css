@@ -43,9 +43,13 @@ h1:last-of-type {
 }
 
 img {
-    float: right;
+    float: left;
+
 }
 
+.nextbutton {
+  float: right;
+}
 @media (max-width: 450px) {
     .box {
         height: 200px;
@@ -102,5 +106,17 @@ h2 {
     .header p {
         width: 30%;
     }
+
+}
+
+.next {
+  background-color: hsl(0deg 78% 62%);
+  color: white;
+  padding: 10px 15px 10px 15px;
+  font-size: 15px;
+}
+
+.round {
+  border-radius: 30%;
 
 }
