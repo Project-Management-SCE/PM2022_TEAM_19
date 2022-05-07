@@ -194,9 +194,27 @@ app.get("/ownerPage", function(req, res) {
   });
 });
 
+app.get("/home", function(req, res) {
+
+  Parking.find({}, function(err, posts) {
+    res.render("home", {
+      posts: posts
+    });
+
+  });
+});
+
+
+
+
 app.get("/compose", function(req, res) {
   res.render("compose");
 });
+
+app.get("/composeAdmin", function(req, res) {
+  res.render("composeAdmin");
+});
+
 
 app.get("/signup", function(req, res) {
   res.render("signup", {
@@ -221,11 +239,12 @@ app.post('/login', function(req, res) {
       if (req.body.password === user.password) {
 
         if (user.isOwner === "on") {
-          res.redirect("/ownerPage", {userName : req.body.username});
+          res.redirect("/ownerPage");
         } else if (user.isAdmin === "on") {
-          res.redirect("/adminPage" , {userName : req.body.username});
+          res.redirect("/adminPage");
         } else {
-          res.redirect("/customerPage", {userName : req.body.username});
+          res.redirect("/customerPage");
+            res.redirect("/home");
         }
       } else {
         req.flash("message", "paswword not match!");
@@ -296,6 +315,64 @@ app.post('/signup', checkNotAuthenticated, async (req, res) => {
 });
 
 
+app.post('/addUser', checkNotAuthenticated, async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    let users = new User({
+      userName: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      phone: req.body.phone,
+      isOwner: req.body.isOwner,
+      isCustomer: req.body.isCustomer,
+
+    });
+    User.findOne({
+      userName: req.body.username,
+
+    }, function(err, user) {
+      if (err) {
+        res.json({
+          error: err
+        })
+      }
+      if (!user) {
+        if (passwordschema.validate(req.body.password)) {
+          if (usernameschema.validate(req.body.username)) {
+            if (phoneschema.validate(req.body.phone)) {
+              users.save(function(err) {
+                if (!err) {
+                  res.redirect("/login");
+                }
+              });
+            } else {
+              req.flash("message", "The phone should have a length of 10 digits of numbers");
+              res.redirect("/signup");
+            }
+          } else {
+            req.flash("message", "The username should have a  Min length 8 and max 10 , no space , lowcase");
+            res.redirect("/signup");
+          }
+
+        } else {
+          req.flash("message", "the password should have a max length of 15 characters, min of 1 uppercase letter and minimum of 2 digits");
+          res.redirect("/signup");
+        };
+
+      } else {
+        req.flash("message", "the user is already exist!");
+        res.redirect("/signup");
+      }
+    });
+
+
+  } catch {
+    res.redirect('/signup')
+  }
+});
+
+
+
 
 app.get("/login", function(req, res) {
   res.render("login", {
@@ -343,10 +420,31 @@ app.post("/compose", function(req, res) {
 
   post.save(function(err) {
     if (!err) {
-      res.redirect("ownerPage");
+        res.redirect("ownerPage");
     }
   });
 });
+
+
+app.post("/composeAdmin", function(req, res) {
+  let post = new Parking({
+
+    title: req.body.postTitle,
+    description : req.body.postDescription,
+    address: req.body.place,
+    type: req.body.postType,
+    status: req.body.postStatus,
+    price: req.body.postPrice
+  });
+
+
+  post.save(function(err) {
+    if (!err) {
+        res.redirect("/home");
+    }
+  });
+});
+
 
 app.post("/delete", function(req, res) {
   const deleted = req.body.deleting;
