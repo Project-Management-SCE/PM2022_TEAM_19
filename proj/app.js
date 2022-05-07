@@ -20,7 +20,7 @@ var passwordValidator = require('password-validator');
 
 const aboutContent = "Find Parking ..";
 
-
+var SearchLocation;
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -111,6 +111,7 @@ app.get("/sort", function(req ,res){
 });
 
 app.post("/map", function(req, res) {
+    SearchLocation = req.body.place
     Parking.find({address: req.body.place}, function(err, posts){
     res.render("sort" ,
     { result : posts
@@ -120,7 +121,7 @@ app.post("/map", function(req, res) {
 
 
 app.post("/available" , function(req , res){
-   Parking.find({status : "Available"}, function(err , posts){
+   Parking.find({status : "Available", address: SearchLocation}, function(err , posts){
     res.render("sort", {
       result : posts
     });
@@ -128,7 +129,7 @@ app.post("/available" , function(req , res){
 });
 
 app.post("/unavailable" , function(req , res){
-   Parking.find({status : "Unavailable" }, function(err , posts){
+   Parking.find({status : "Unavailable" , address: SearchLocation}, function(err , posts){
     res.render("sort", {
       result : posts
     });
@@ -136,7 +137,7 @@ app.post("/unavailable" , function(req , res){
 });
 
 app.post("/regular" , function(req , res){
-   Parking.find({status : "Regular" }, function(err , posts){
+   Parking.find({status : "Regular" , address: SearchLocation}, function(err , posts){
     res.render("sort", {
       result : posts
     });
@@ -144,7 +145,7 @@ app.post("/regular" , function(req , res){
 });
 
 app.post("/disabled" , function(req , res){
-   Parking.find({type : "Disabled" }, function(err , posts){
+   Parking.find({type : "Disabled" , address: SearchLocation}, function(err , posts){
     res.render("sort", {
       result : posts
     });
