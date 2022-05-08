@@ -1,4 +1,5 @@
  //jshint esversion:6
+
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -161,6 +162,40 @@ app.post("/disabled" , function(req , res){
   });
 });
 
+
+app.post("/allavailable" , function(req , res){
+   Parking.find({status : "Available"}, function(err , posts){
+    res.render("customerPage", {
+      posts : posts
+    });
+  });
+});
+
+app.post("/allunavailable" , function(req , res){
+   Parking.find({status : "Unavailable"}, function(err , posts){
+    res.render("customerPage", {
+      posts : posts
+    });
+  });
+});
+
+app.post("/allregular" , function(req , res){
+   Parking.find({type : "Regular" }, function(err , posts){
+    res.render("customerPage", {
+      posts : posts
+    });
+  });
+});
+
+app.post("/alldisabled" , function(req , res){
+   Parking.find({type : "Disabled" }, function(err , posts){
+    res.render("customerPage", {
+      posts : posts
+    });
+  });
+});
+
+
 //cart functions
 app.get("/cart", function(req,res){
   res.render("cart");
@@ -241,10 +276,9 @@ app.post('/login', function(req, res) {
         if (user.isOwner === "on") {
           res.redirect("/ownerPage");
         } else if (user.isAdmin === "on") {
-          res.redirect("/adminPage");
+          res.redirect("/home");
         } else {
           res.redirect("/customerPage");
-            res.redirect("/home");
         }
       } else {
         req.flash("message", "paswword not match!");
@@ -315,6 +349,14 @@ app.post('/signup', checkNotAuthenticated, async (req, res) => {
 });
 
 
+
+app.get("/addUser", function(req, res) {
+  res.render("addUser", {
+    message: req.flash("message")
+  });
+});
+
+
 app.post('/addUser', checkNotAuthenticated, async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -342,26 +384,26 @@ app.post('/addUser', checkNotAuthenticated, async (req, res) => {
             if (phoneschema.validate(req.body.phone)) {
               users.save(function(err) {
                 if (!err) {
-                  res.redirect("/login");
+                  res.redirect("/users");
                 }
               });
             } else {
               req.flash("message", "The phone should have a length of 10 digits of numbers");
-              res.redirect("/signup");
+              res.redirect("/addUser");
             }
           } else {
             req.flash("message", "The username should have a  Min length 8 and max 10 , no space , lowcase");
-            res.redirect("/signup");
+            res.redirect("/addUser");
           }
 
         } else {
           req.flash("message", "the password should have a max length of 15 characters, min of 1 uppercase letter and minimum of 2 digits");
-          res.redirect("/signup");
+          res.redirect("/addUser");
         };
 
       } else {
         req.flash("message", "the user is already exist!");
-        res.redirect("/signup");
+        res.redirect("/addUser");
       }
     });
 
@@ -380,13 +422,19 @@ app.get("/login", function(req, res) {
   });
 });
 
+
 app.get("/ownerPage", function(req, res) {
   res.render("ownerPage");
 });
 
 
 app.get("/customerPage", function(req, res) {
-  res.render("customerPage");
+  Parking.find({}, function(err, posts) {
+    res.render("customerPage", {
+      posts: posts
+    });
+
+  });
 });
 
 

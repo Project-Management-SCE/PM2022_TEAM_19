@@ -1,9 +1,9 @@
 {
   "dependencies": {
+    "jest": "^28.1.0",
     "test": "^0.6.0"
   },
-  "scripts":{
-    "test":"node test.js"
+  "scripts": {
+    "test": "node test.js"
   }
-  
 }

@@ -1,6 +1,41 @@
 <%- include("partials/adminH"); -%>
 
+    <h1>Add NEW User</h1>
+    <br>
+    <form class="" action="/addUser" method="post">
+      <div class="form-group">
+        <label>User name</label>
+        <input class="form-control" type="text" name="username" placeholder="Enter a username">
 
+        <label>Email</label>
+        <input class="form-control" type="email" name="email" placeholder="Enter a email">
+
+        <label>Password</label>
+        <input class="form-control"  id="pac-input" type="password" name="password" placeholder="Enter a password" />
+
+        <label>Phone</label>
+        <input class="form-control"  id="pac-input" type="text" name="phone" placeholder="Enter phoneNumber" />
+
+
+        <div class="form-group">
+          <input type="checkbox" name="isOwner" class="agree-term" onclick="onlyOne(this)" >
+          <label for="agree-term" class="label-agree-term"><span><span></span></span>Is Owner </label>
+          <br>
+        </div>
+
+
+
+
+      </div>
+      <button class="publish btn btn-lg btn-danger hover-top btn-glow" type="submit" name="button">Add</button>
+    </form>
+
+
+    <div id="map"></div>
+    <div id="infowindow-content">
+      <span id="place-name" class="title"></span><br />
+      <span id="place-address" ></span>
+    </div>
 
 
 
