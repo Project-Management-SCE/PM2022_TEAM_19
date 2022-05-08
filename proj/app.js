@@ -111,6 +111,8 @@ app.get("/sort", function(req ,res){
 
 });
 
+
+
 app.post("/sort", function(req ,res){
   Parking.find({address:SearchLocation}, function(err, items){
   res.render("cart" ,
@@ -119,6 +121,8 @@ app.post("/sort", function(req ,res){
 })
 
 });
+
+
 
 app.post("/map", function(req, res) {
     SearchLocation = req.body.place
@@ -130,6 +134,7 @@ app.post("/map", function(req, res) {
 });
 
 
+
 app.post("/available" , function(req , res){
    Parking.find({status : "Available", address: SearchLocation}, function(err , posts){
     res.render("sort", {
@@ -137,6 +142,8 @@ app.post("/available" , function(req , res){
     });
   });
 });
+
+
 
 app.post("/unavailable" , function(req , res){
    Parking.find({status : "Unavailable" , address: SearchLocation}, function(err , posts){
@@ -146,6 +153,8 @@ app.post("/unavailable" , function(req , res){
   });
 });
 
+
+
 app.post("/regular" , function(req , res){
    Parking.find({type : "Regular" , address: SearchLocation}, function(err , posts){
     res.render("sort", {
@@ -153,6 +162,8 @@ app.post("/regular" , function(req , res){
     });
   });
 });
+
+
 
 app.post("/disabled" , function(req , res){
    Parking.find({type : "Disabled" , address: SearchLocation}, function(err , posts){
@@ -163,6 +174,7 @@ app.post("/disabled" , function(req , res){
 });
 
 
+
 app.post("/allavailable" , function(req , res){
    Parking.find({status : "Available"}, function(err , posts){
     res.render("customerPage", {
@@ -170,6 +182,8 @@ app.post("/allavailable" , function(req , res){
     });
   });
 });
+
+
 
 app.post("/allunavailable" , function(req , res){
    Parking.find({status : "Unavailable"}, function(err , posts){
@@ -179,6 +193,8 @@ app.post("/allunavailable" , function(req , res){
   });
 });
 
+
+
 app.post("/allregular" , function(req , res){
    Parking.find({type : "Regular" }, function(err , posts){
     res.render("customerPage", {
@@ -186,6 +202,8 @@ app.post("/allregular" , function(req , res){
     });
   });
 });
+
+
 
 app.post("/alldisabled" , function(req , res){
    Parking.find({type : "Disabled" }, function(err , posts){
@@ -203,11 +221,11 @@ app.get("/cart", function(req,res){
 
 
 
-
-
 app.get("/", function(req, res) {
   res.render("homepage");
 });
+
+
 
 app.get("/parkings", function(req, res) {
 
@@ -218,6 +236,8 @@ app.get("/parkings", function(req, res) {
 
   });
 });
+
+
 
 app.get("/ownerPage", function(req, res) {
 
@@ -241,14 +261,16 @@ app.get("/home", function(req, res) {
 
 
 
-
 app.get("/compose", function(req, res) {
   res.render("compose");
 });
 
+
+
 app.get("/composeAdmin", function(req, res) {
   res.render("composeAdmin");
 });
+
 
 
 app.get("/signup", function(req, res) {
@@ -290,6 +312,7 @@ app.post('/login', function(req, res) {
     }
   });
 });
+
 
 
 app.post('/signup', checkNotAuthenticated, async (req, res) => {
@@ -357,6 +380,7 @@ app.get("/addUser", function(req, res) {
 });
 
 
+
 app.post('/addUser', checkNotAuthenticated, async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -415,7 +439,6 @@ app.post('/addUser', checkNotAuthenticated, async (req, res) => {
 
 
 
-
 app.get("/login", function(req, res) {
   res.render("login", {
     message: req.flash("message")
@@ -428,6 +451,8 @@ app.get("/ownerPage", function(req, res) {
 });
 
 
+
+
 app.get("/customerPage", function(req, res) {
   Parking.find({}, function(err, posts) {
     res.render("customerPage", {
@@ -438,9 +463,13 @@ app.get("/customerPage", function(req, res) {
 });
 
 
+
+
 app.get("/adminPage", function(req, res) {
   res.render("adminPage");
 });
+
+
 
 
 app.get('/users', function(req, res) {
@@ -451,6 +480,8 @@ app.get('/users', function(req, res) {
 
   });
 });
+
+
 
 
 
@@ -474,6 +505,8 @@ app.post("/compose", function(req, res) {
 });
 
 
+
+
 app.post("/composeAdmin", function(req, res) {
   let post = new Parking({
 
@@ -485,13 +518,13 @@ app.post("/composeAdmin", function(req, res) {
     price: req.body.postPrice
   });
 
-
   post.save(function(err) {
     if (!err) {
         res.redirect("/home");
     }
   });
 });
+
 
 
 app.post("/delete", function(req, res) {
@@ -504,6 +537,7 @@ app.post("/delete", function(req, res) {
   });
   res.redirect("users");
 });
+
 
 
 app.get("/posts/:postId", function(req, res) {
@@ -526,12 +560,12 @@ app.get("/posts/:postId", function(req, res) {
 
 });
 
+
 app.get("/about", function(req, res) {
   res.render("about", {
     aboutContent: aboutContent
   });
 });
-
 
 
 
@@ -554,7 +588,8 @@ function checkNotAuthenticated(req, res, next) {
 
 
 
-
-app.listen(3000, function() {
+app.listen(8000, function() {
   console.log("Server started on port 3000");
 });
+
+module.exports = app;
