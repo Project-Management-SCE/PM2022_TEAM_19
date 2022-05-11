@@ -8,13 +8,13 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-const mongoose = require('mongoose');
 var passport = require("passport");
 const bcrypt = require("bcrypt");
 //const flash = require("express-flash");
 const flash = require("connect-flash");
 const session = require("express-session");
 var passwordValidator = require('password-validator');
+const mongoose = require('mongoose');
 //var foo = require('./foo.js');
 //var bar = require('../lib/bar.js');
 //var gamma = require('gamma');
@@ -39,9 +39,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 
-mongoose.connect("mongodb://localhost:27017/UserDB", {
-  useNewUrlParser: true
-});
+
 
 //parking model
 const parkingSchema = {
@@ -584,12 +582,5 @@ function checkNotAuthenticated(req, res, next) {
   }
   next()
 }
-
-
-
-
-app.listen(8000, function() {
-  console.log("Server started on port 3000");
-});
 
 module.exports = app;
