@@ -26,6 +26,30 @@
       <button class="button4 button" type="submit" name="disabled">Disabled</button>
     </form>
   </tr>
+
+  <tr>
+    <form class="" action="/carSort" method="post">
+      <button class="button4 button" type="submit" name="car">Car</button>
+    </form>
+  </tr>
+
+  <tr>
+    <form class="" action="/busSort" method="post">
+      <button class="button4 button" type="submit" name="bus">Bus</button>
+    </form>
+  </tr>
+
+  <tr>
+    <form class="" action="/truckSort" method="post">
+      <button class="button4 button" type="submit" name="truck">Truck</button>
+    </form>
+  </tr>
+
+  <tr>
+    <form class="" action="/motorcycleSort" method="post">
+      <button class="button4 button" type="submit" name="motorcycle">Motorcycle</button>
+    </form>
+  </tr>
 </table>
 
 
@@ -35,17 +59,25 @@
 <form class="" action="/sort" method="post">
   <% posts.forEach(function(r) {%>
   <div class="box red">
-    <h2 name ="status"><%=r.status%></h2>
-    <h3 name ="title"><%= r.title%></h3>
+    <table>
+      <tr>
+        <td>
+            <h2 name ="status"><%=r.status%>&nbsp </h2>
+        </td>
+        <td>
+          <h2 name ="vehicle"><%=r.vehicle%></h2>
+        </td>
+      </tr>
+    </table>
     <h4 name ="description"> <%= r.description%></h4><br>
     <h4 name ="address"> <%= r.address%></h4><br>
     <h4 name ="type"> <%= r.type%></h4><br>
     <h4 name ="price"> <%= r.price%>₪ per Hour</h4>
   <!-- <img src="https://assets.codepen.io/2301174/icon-team-builder.svg" alt=""> -->
-    <button class="next round nextbutton" type="submit" name="add">Add to cart</button>
+    <a href="/cart/<%=r._id%>" class="next round nextbutton" name="add">Buy NOW</a>
   </div>
-  <%})%>
 
+  <%})%>
 
 </form>
 

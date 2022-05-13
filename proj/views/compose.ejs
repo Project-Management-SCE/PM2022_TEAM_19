@@ -5,10 +5,20 @@
     <form class="" action="/compose" method="post">
       <div class="form-group">
         <label>Title</label>
-        <input class="form-control" type="text" name="postTitle" placeholder="Enter a Title">
+        <input class="form-control" type="text" name="postTitle" placeholder="Contact Title">
+
+        <label>Vehicle</label>
+        <select class="form-control" type="text" name="vehicle" placeholder="Enter Vehicle">
+          <option value="Car">Car</option>
+          <option value="Bus">Bus</option>
+          <option value="Truck">Truck </option>
+          <option value="Motorcycle">Motorcycle</option>
+        </select>
+
 
         <label>Description</label>
         <textarea rows="4" cols="4" class="form-control" type="text" name="postDescription" placeholder="Enter a description"></textarea>
+
 
 
         <label>Address</label>
@@ -26,6 +36,7 @@
           <option value="Available"> Available </option>
           <option value="Unavailable"> Unavailable</option>
         </select>
+
 
 
         <label>Price per Hour</label>

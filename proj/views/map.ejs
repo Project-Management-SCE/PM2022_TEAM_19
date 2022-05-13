@@ -4,6 +4,7 @@
 <head>
   <title>Place Autocomplete</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script src="https://kit.fontawesome.com/a0b2b7782f.js" crossorigin="anonymous"></script>
   <style media="screen">
     #map {
       height: 100%;
@@ -18,6 +19,14 @@
       height: 100%;
       margin: 0;
       padding: 0;
+    }
+
+    .container {
+      margin-top: 40px;
+    }
+
+    .btn-primary {
+      width: 100%;
     }
 
     #description {
@@ -43,7 +52,6 @@
       border: 0;
       border-radius: 4px;
       box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-      margin: 10px;
       padding: 0 0.5em;
       font: 400 18px Roboto, Arial, sans-serif;
       overflow: hidden;
@@ -79,7 +87,7 @@
     }
 
     .pac-controls label {
-      font-family: Roboto;
+      font-family: sans-serif;
       font-size: 13px;
       font-weight: 300;
     }
@@ -89,11 +97,10 @@
       font-family: Roboto;
       font-size: 15px;
       font-weight: 300;
-      margin-left: 12px;
-      padding: 0 11px 0 13px;
+
       text-overflow: ellipsis;
-      width: 400px;
-      border-radius: 5px
+      width: auto;
+      border-radius: 3px
     }
 
     #pac-input:focus {
@@ -106,27 +113,63 @@
       font-size: 25px;
       font-weight: 500;
       padding: 6px 12px;
+      border-radius: 3px;
+      margin-bottom: 20px;
     }
 
     .float-container {
       border: 3px solid #fff;
-      padding: 20px;
+      padding: auto;
+      margin: auto;
+    }
+
+    .calender {
+      padding: 10px;
+    }
+
+    .split {
+      height: 100%;
+      width: 20%;
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      overflow-x: hidden;
+      padding-top: 20px;
+    }
+
+    .left {
+      left: 0;
+      background-color: #f8f9fa;
+    }
+
+    .right {
+      right: 0;
+
     }
 
     .float-child {
-      width: 50%;
+      width: 25%;
       float: left;
       padding: 20px;
-      border: 2px solid red;
+      border: 2px solid white;
       border-radius: 6px;
     }
+/*
+    select#type option[value="car"]   { background-image:url(../public/images/car.png);   }
+    select#type option[value="bus"] { background-image:url(bus.png); }
+    select#type option[value="truck"] { background-image:url(truck.png); }
+    select#type option[value="motorcycle"] { background-image:url(motorcycle.png); } */
+
+  #type {
+    padding:5px;
+  }
   </style>
 </head>
 
 <body>
 
-  <div class="float-container">
-    <div class="pac-card float-child" id="pac-card">
+  <div class="float-container  ">
+    <div class="pac-card float-child split left" id="pac-card">
       <div>
         <div id="title">search Parking</div>
         <div id="type-selector" class="pac-controls">
@@ -159,19 +202,63 @@
       </div>
 
       <form class="" action="/map" method="post">
-        <div id="pac-container">
-          <input id="pac-input" type="text" name="place" placeholder="Enter a location" />
-        </div>
-        <button type="submit" name="next" class="form-submit"> Next </button>
+        <table>
+          <tr id="pac-container">
+            <td class="calender">
+              <label>Location :</label>
+            </td>
+
+            <td>
+              <input id="pac-input" type="text" name="place" placeholder="Enter a location" />
+            </td>
+          </tr>
+
+
+          <tr class='input-group date ' id='datetimepicker1'>
+            <td class="calender">
+              <label class="control-label"> Arrival : </label>
+            </td>
+
+            <td>
+              <input type="datetime-local" id="meeting-time" name="arrival" value="2022-06-12T19:30" min="2022-06-07T00:00" max="2024-12-28T00:00">
+            </td>
+          </tr>
+
+
+
+          <tr>
+            <td class="calender">
+              <label class="control-label"> Vehicle </label>
+            </td>
+
+            <td>
+              <select id="type" type="text" name="vehicle" placeholder="Enter vehicle">
+                <option value="Car">Car</option>
+                <option value="Bus">Bus</option>
+                <option value="Truck">Truck </option>
+                <option value="Motorcycle">Motorcycle</option>
+              </select>
+            </td>
+          </tr>
+
+
+
+
+        </table>
+
+
+
+
+        <button type="submit" name="next" class="form-submit"> Search </button>
       </form>
 
     </div>
   </div>
 
   <div id="map"></div>
-  <div id="infowindow-content">
+  <div id="infowindow-content split right">
     <span id="place-name" class="title"></span><br />
-    <span id="place-address" ></span>
+    <span id="place-address"></span>
   </div>
   <script>
     function initMap() {

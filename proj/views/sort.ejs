@@ -1,5 +1,6 @@
 <%- include("partials/customerHeader"); -%>
 <link rel="stylesheet" href="/css/custyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/solid.min.css">
 <table>
   <tr>
     <form class="" action="/available" method="post">
@@ -31,21 +32,34 @@
 
 
 <form class="" action="/sort" method="post">
+
+</form>
   <% result.forEach(function(r) {%>
   <div class="box red">
-    <h2 name ="status"><%=r.status%></h2>
-    <h3 name ="title"><%= r.title%></h3>
+    <table>
+      <tr>
+        <td>
+            <h2 name ="status"><%=r.status%>&nbsp </h2>
+        </td>
+        <td>
+          <h2 name ="vehicle"><%=r.vehicle%></h2>
+        </td>
+      </tr>
+    </table>
+    <h3 name ="title"> <%= r.title%></h3>
     <h4 name ="description"> <%= r.description%></h4><br>
-    <h4 name ="address"> <%= r.address%></h4><br>
+    <h4 name ="address"> <i class="fa-solid fa-location-dot"></i><%= r.address%></h4><br>
     <h4 name ="type"> <%= r.type%></h4><br>
     <h4 name ="price"> <%= r.price%>₪ per Hour</h4>
   <!-- <img src="https://assets.codepen.io/2301174/icon-team-builder.svg" alt=""> -->
-    <button class="next round nextbutton" type="submit" name="add">Add to cart</button>
+   <a href="/cart/<%=r._id%>" class="next round nextbutton" name="add">Buy NOW</a>
+
+
+
   </div>
   <%})%>
 
 
-</form>
 
 
 
