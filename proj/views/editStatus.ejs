@@ -1,0 +1,53 @@
+<%- include("partials/header", {username: username}); -%>
+    <h1>Edit Status</h1>
+    <br>
+    <style media="screen">
+      h1 {
+        color: #555;
+      }
+
+      h3 {
+        color: #a5716f;
+      }
+    </style>
+    <form class="" action="/status/<%=parking._id%>" method="post">
+
+      <div class="form-group">
+        <h1>edit <%=title%>  parking</h1>
+        <%if (message.length > 0){ %>
+        <div class="alert alert-danger" role="alert">
+           <h4><%= message %></h4>
+        </div>
+        <%}%>
+        <br><br>
+
+        <label>Status</label>
+        <select class="form-control" type="text" name="status" placeholder="Enter status">
+          <option value="Available"> Available </option>
+          <option value="Unavailable"> Unavailable</option>
+        </select>
+
+
+        <h1>Vehicle type : </h1>
+        <h3><%=parking.vehicle%></h3>
+        </p>
+        <h1>Parking's Description : </h1>
+        <h3><%=parking.description%></h3>
+        </p>
+        <h1>Parking's Adress :</h1>
+        <h3><%=parking.address%></h3>
+        </p>
+        <h1>Parking's Type :</h1>
+        <h3><%=parking.type%></h3>
+        </p>
+
+        <h1> Parking's Price :</h1>
+        <h3><%=parking.price%>₪ per Hour</h3>
+
+
+      </div>
+      <button  class="publish btn btn-lg btn-danger hover-top btn-glow" name="button">Edit</button>
+    </form>
+
+
+<%- include("partials/footer"); -%>

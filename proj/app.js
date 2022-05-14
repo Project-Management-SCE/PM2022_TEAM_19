@@ -218,8 +218,6 @@ app.get("/edit/:id", function(req, res) {
 });
 
 
-
-
 app.post("/edit/:id", function(req, res) {
   console.log("***********");
   let parkingid = req.params.id;
@@ -252,7 +250,7 @@ app.post("/edit/:id", function(req, res) {
           if (err) {
             console.log("error");
           } else {
-              req.flash("message", "Updates successfuly");
+              req.flash("message", "Updated successfuly");
               res.render("edit" , {parking : parking ,title: parking.title,
               username : loggedinUser.userName, message: req.flash("message")} );
           }
@@ -264,6 +262,150 @@ app.post("/edit/:id", function(req, res) {
     }
   });
 });
+
+
+////////////adminH
+
+
+
+
+app.get("/editt/:id", function(req, res) {
+  let parkingid = req.params.id;
+  Parking.findOne({
+    _id: parkingid,
+    seller_id: loggedinUser._id
+  }, function(err, parking) {
+    console.log("***********");
+    if (parking) {
+      res.render("editAdmin", {
+        message: req.flash("message"),
+        title: parking.title,
+        parking: parking._id,
+        message: req.flash("message"),
+        username : loggedinUser.userName
+      });
+      console.log("***********");
+    }
+  });
+});
+
+
+
+app.post("/editt/:id", function(req, res) {
+  console.log("***********");
+  let parkingid = req.params.id;
+  console.log(parkingid);
+  Parking.findOne({
+    _id: parkingid
+  }, function(err, parking) {
+    try {
+      if (parking) {
+        console.log("***********");
+        console.log(parking.title);
+        console.log(req.body.description);
+        console.log(req.body.address);
+        console.log(req.body.type);
+        console.log(req.body.status);
+        console.log(req.body.price);
+        console.log(req.body.vehicle);
+        Parking.updateOne({
+          _id:parking._id
+        }, {
+          seller_id: parking.seller_id,
+          title: parking.title,
+          description: req.body.description,
+          address: req.body.address,
+          type: req.body.type,
+          status: req.body.status,
+          price: req.body.price,
+          vehicle: req.body.vehicle
+        }, function(err, success) {
+          if (err) {
+            console.log("error");
+          } else {
+              req.flash("message", "Updated successfuly");
+              res.render("editAdmin" , {parking : parking ,title: parking.title,
+              username : loggedinUser.userName, message: req.flash("message")} );
+          }
+        });
+
+      }
+    } catch (e) {
+
+    }
+  });
+});
+
+
+
+ /////edit Status
+
+
+
+ app.get("/status/:id", function(req, res) {
+   let parkingid = req.params.id;
+   Parking.findOne({
+     _id: parkingid,
+     seller_id: loggedinUser._id
+   }, function(err, parking) {
+     console.log("***********");
+     if (parking) {
+       res.render("editStatus", {
+         message: req.flash("message"),
+         title: parking.title,
+         vehicle: parking.vehicle,
+         description: parking.description,
+         address: parking.address,
+         type: parking.type,
+         status: parking.status,
+         price: parking.price,
+         parking:parking,
+         message: req.flash("message"),
+         username : loggedinUser.userName
+       });
+       console.log("***********");
+     }
+   });
+ });
+
+
+ app.post("/status/:id", function(req, res) {
+   console.log("***********");
+   let parkingid = req.params.id;
+   console.log(parkingid);
+   Parking.findOne({
+     _id: parkingid
+   }, function(err, parking) {
+     try {
+       if (parking) {
+         Parking.updateOne({
+           _id:parking._id
+         }, {
+           seller_id: parking.seller_id,
+           title: parking.title,
+           description: parking.description,
+           address: parking.address,
+           type: parking.type,
+           status: req.body.status,
+           price:parking.price,
+           vehicle: parking.vehicle
+         }, function(err, success) {
+           if (err) {
+             console.log("error");
+           } else {
+               req.flash("message", "Updated successfuly");
+               res.render("editStatus" , {parking : parking ,title: parking.title,
+               username : loggedinUser.userName, message: req.flash("message")} );
+           }
+         });
+
+       }
+     } catch (e) {
+
+     }
+   });
+ });
+
 
 
 app.post("/map", function(req, res) {
