@@ -15,9 +15,10 @@
 
 
   <% posts.forEach(function(post) {%>
-  <form class="" action="" method="post">
+  <form class="" action="/postdelete" method="post">
     <div class="item">
       <input type="checkbox" name="checkbox" value="" onChange="">
+      <button type="submit" value="<%= post._id %>" name="deleting">🗑️</button>
       <p>
       <h4>title :<h5><%= post.title %> </h5>&nbsp;&nbsp;&nbsp;</h4>
       <h4>address :<h5><%= post.address %> </h5>&nbsp;&nbsp;&nbsp;</h4>
@@ -31,15 +32,5 @@
   </form>
 
 
-
-
-  <form class="item padding" action="/" method="post">
-    <p>
-      <button type="submit" name="list">Add</button>
-      <button classtype="submit" name="list">🗑️</button>
-      </p>
-
-
-  </form>
 </div>
 <%- include("partials/footer"); -%>

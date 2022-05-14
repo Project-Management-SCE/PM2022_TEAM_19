@@ -1,7 +1,16 @@
 <%- include("partials/customerHeader", {username: username}); -%>
 <link rel="stylesheet" href="/css/cart.css">
+<style>
+        #paypal-button-container {
+            text-align: center;
+        }
+        .label{
+          text-align: center;
+        }
+    </style>
+    <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
+    <script>paypal.Buttons().render('#paypal-button-container');</script>
 
-<head>
   <title>Shopping Cart UI</title>
   <link rel="stylesheet" type="text/css" href="./style.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,900" rel="stylesheet">
@@ -9,6 +18,7 @@
 
 <body>
     <form class="" action="" method="post">
+
       <div class="CartContainer">
           <div class="Header">
             <h3 class="Heading">Shopping Cart</h3>
@@ -20,35 +30,38 @@
               <img src="https://assets.codepen.io/2301174/icon-team-builder.svg" style={{ height="120px" }} />
             </div>
             <div class="about">
+              <!-- <label for="">Parking</label> -->
               <h1 class="title"><%=title%></h1>
               <h3 class="subtitle"><%=description%></h3>
 
             </div>
 
-            <!-- <div class="about">
-              <h1 class="title"><%%></h1>
+            <div class="about">
+              <!-- <label for="">Ariivel</label> -->
+              <h3 class="subtitle"><%=arrival%></h3>
+            </div>
 
-            </div> -->
 
             <div class="counter">
-
+              <!-- <label for="">Hours</label> -->
               <select class="form-control" type="text" name="status" placeholder="Enter status">
-                <option value="1"> 1 </option>
-                <option value="2"> 2</option>
-                <option value="3"> 3</option>
-                <option value="4"> 4</option>
-                <option value="5"> 5</option>
-                <option value="6"> 6</option>
-                <option value="7"> 7</option>
-                <option value="8"> 8</option>
-                <option value="9"> 9</option>
-                <option value="10"> 10</option>
-                <option value="11"> 11</option>
-                <option value="12"> 12</option>
+                <option value="1"> 1h </option>
+                <option value="2"> 2h</option>
+                <option value="3"> 3h</option>
+                <option value="4"> 4h</option>
+                <option value="5"> 5h</option>
+                <option value="6"> 6h</option>
+                <option value="7"> 7h</option>
+                <option value="8"> 8h</option>
+                <option value="9"> 9h</option>
+                <option value="10"> 10h</option>
+                <option value="11"> 11h</option>
+                <option value="12"> 12h</option>
 
               </select>
 
             </div>
+            <!-- <label for="">Price</label> -->
             <div class="prices">
               <div class="amount"><%=price%>₪ </div>
 
@@ -69,9 +82,11 @@
           </div>
           <div class="total-amount">amount</div>
         </div>
-        <button class="button">Checkout</button>
+            <div id="paypal-button-container" ></div>
       </div>
+
   </div>
+
   </form>
 </body>
 

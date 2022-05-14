@@ -173,16 +173,20 @@ app.get("/cart/:parkingId", function(req, res) {
           item_id: item._id,
           Arrival: Arrivel,
 
+
         });
         console.log("*************************");
+        console.log(Arrivel);
         order.save(function(err) {
           if (!err) {
-            console.log("*************************");
+            console.log("*********aa**********");
+            console.log(Arrivel);
             res.render("buy", {
               title: item.title,
               description: item.description,
               price: item.price,
-              username : loggedinUser.userName
+              username : loggedinUser.userName,
+              arrival:Arrivel
             });
           }
 
@@ -910,6 +914,17 @@ app.post("/delete", function(req, res) {
     }
   });
   res.redirect("users");
+});
+
+app.post("/postdelete", function(req, res) {
+  const deleted = req.body.deleting;
+  console.log(deleted);
+  Parking.findByIdAndRemove(deleted, function(err) {
+    if (!err) {
+      console.log("successfuly deleting cheked Item");
+    }
+  });
+  res.redirect("parkings");
 });
 
 
