@@ -40,11 +40,12 @@ h1:last-of-type {
     margin: 20px;
     display : inline-block;
 
+
 }
 
 img {
-  
-    width: 6%;
+
+    width: 30%;
 
 }
 
@@ -101,7 +102,7 @@ h2 {
         top: 150px;
     }
     .box {
-        width: 50%;
+        width: 90%;
 
     }
     .header p {

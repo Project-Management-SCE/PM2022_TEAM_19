@@ -1,4 +1,4 @@
-<%- include("partials/header"); -%>
+<%- include("partials/header", {username: username}); -%>
 <link rel="stylesheet" href="/css/custyle.css">
 <h1>Parking Shared </h1>
 <p> <%= %> </p>
@@ -38,9 +38,10 @@
   <div class="box red">
     <h2><%=post.title%></h2>
     <p>
-      <a href="/posts/<%=post._id%>">Read More</a>
+      <a href="/posts/<%=post._id%>">More Details</a>
     </p>
     <img src="https://assets.codepen.io/2301174/icon-team-builder.svg" alt="">
+    <a href="/edit/<%=post._id%>" class="next round nextbutton" name="edit">Edit</a>
   </div>
   <%})%>
 
