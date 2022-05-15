@@ -26,6 +26,8 @@ var SearchLocation;
 var SearchVehicle;
 var Arrivel;
 var loggedinUser;
+var time;
+var amount =0;
 
 
 const app = express();
@@ -135,12 +137,13 @@ app.get("/map", function(req, res) {
 
 
 app.get("/sort", function(req, res) {
+
   res.render("sort");
 
 });
 
 app.post("/sort", function(req, res) {
-
+  time = req.body.time
 });
 
 //cart functions
@@ -148,13 +151,39 @@ app.get("/cart", function(req, res) {
   res.render("cart");
 });
 
+app.post("/cart/:parkingId", function(req, res) {
 
 
+  const requestedParkingId = req.params.parkingId;
+
+
+  console.log(requestedParkingId);
+  Parking.findOne({
+    _id: requestedParkingId
+  }, function(err, item) {
+    timet = req.body.time
+    pricet = item.price
+    console.log(timet);
+    console.log(pricet);
+    let amount = parseInt(timet)*parseInt(pricet);
+    res.render("cheakout", {
+      title: item.title,
+      description: item.description,
+      price: item.price,
+      username : loggedinUser.userName,
+      arrival:Arrivel,
+      time:req.body.time,
+      item: item,
+      amount: amount
+
+    });
+  });
+
+
+});
 
 app.get("/cart/:parkingId", function(req, res) {
-  console.log("*************************");
   const requestedParkingId = req.params.parkingId;
-  console.log("*************************");
   console.log(requestedParkingId);
   Parking.findOne({
     _id: requestedParkingId
@@ -186,7 +215,10 @@ app.get("/cart/:parkingId", function(req, res) {
               description: item.description,
               price: item.price,
               username : loggedinUser.userName,
-              arrival:Arrivel
+              arrival:Arrivel,
+              time:req.body.time,
+              item:item
+
             });
           }
 
