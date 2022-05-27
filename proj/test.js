@@ -16,46 +16,9 @@ describe("Test Home Page", () => {
   
 });
 
-describe("Test Login Page", () => {
-  test("GET /login", (done) => {
-    request(app)
-      .get("/login")
-      .expect(200)
-      .end((err, res) => {
-        if (err) return done(err);
-        return done();
-      });
-  });
-  
-});
 
 
-describe("Test register Page", () => {
-  test("GET /signup", (done) => {
-    request(app)
-      .get("/signup")
-      .expect(200)
-      .end((err, res) => {
-        if (err) return done(err);
-        return done();
-      });
-  });
-  
-});
 
-
-describe("Test map Page", () => {
-  test("GET /map", (done) => {
-    request(app)
-      .get("/map")
-      .expect(200)
-      .end((err, res) => {
-        if (err) return done(err);
-        return done();
-      });
-  });
-  
-});
 
 
 // describe("Test Sort Page", () => {
