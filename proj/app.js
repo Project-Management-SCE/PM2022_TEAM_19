@@ -51,9 +51,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 
-mongoose.connect("mongodb+srv://adimazbarga:AdimAzbarga12@cluster0.jydbi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
-  useNewUrlParser: true
-});
+
 
 //users models
 

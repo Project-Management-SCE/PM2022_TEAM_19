@@ -14,7 +14,8 @@ pipeline {
         stage('Test') {
             steps {
                 sh "chmod +x -R ${env.WORKSPACE}"
-                sh './scripts/test.sh'
+                sh "cd proj"
+                sh "npm test"
 
             }
         }
