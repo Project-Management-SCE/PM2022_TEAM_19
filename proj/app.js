@@ -122,11 +122,28 @@ usernameschema
   .has().not().spaces() // Should not have spaces
   .has().lowercase() // Must have lowercase letters
 
-app.get("/", function(req, res) {
-  res.render("homepage");
+
+
+//////////////////gets
+
+
+app.get("/signup", function(req, res) {
+  res.render("signup", {
+    message: req.flash("message")
+  });
 });
 
 
+app.get("/login", function(req, res) {
+  res.render("login", {
+    message: req.flash("message")
+  });
+});
+
+
+app.get("/", function(req, res) {
+  res.render("homepage");
+});
 
 
 app.get("/map", function(req, res) {
@@ -141,45 +158,101 @@ app.get("/sort", function(req, res) {
 
 });
 
-app.post("/sort", function(req, res) {
-  time = req.body.time
-});
 
 //cart functions
 app.get("/cart", function(req, res) {
   res.render("cart");
 });
 
-app.post("/cart/:parkingId", function(req, res) {
-
-
-  const requestedParkingId = req.params.parkingId;
-
-
-  console.log(requestedParkingId);
-  Parking.findOne({
-    _id: requestedParkingId
-  }, function(err, item) {
-    timet = req.body.time
-    pricet = item.price
-    console.log(timet);
-    console.log(pricet);
-    let amount = parseInt(timet)*parseInt(pricet);
-    res.render("cheakout", {
-      title: item.title,
-      description: item.description,
-      price: item.price,
-      username : loggedinUser.userName,
-      arrival:Arrivel,
-      time:req.body.time,
-      item: item,
-      amount: amount
-
+app.get("/parkings", function(req, res) {
+  Parking.find({}, function(err, posts) {
+    res.render("parkings", {
+      posts: posts,
+      username : loggedinUser.userName
     });
+
   });
-
-
 });
+
+
+app.get("/ownerPage", function(req, res) {
+  Parking.find({
+    seller_id: loggedinUser._id
+  }, function(err, posts) {
+    res.render("ownerPage", {
+      posts: posts,
+      username : loggedinUser.userName
+    });
+
+  });
+});
+
+app.get("/home", function(req, res) {
+  Parking.find({}, function(err, posts) {
+    res.render("home", {
+      posts: posts,
+      username : loggedinUser.userName
+    });
+
+  });
+});
+
+
+app.get("/compose", function(req, res) {
+  res.render("compose",
+{username: loggedinUser.userName});
+});
+
+//:))))))
+
+app.get("/composeAdmin", function(req, res) {
+  res.render("composeAdmin", {username: loggedinUser.userName});
+});
+
+
+app.get("/addUser", function(req, res) {
+  res.render("addUser", {
+    message: req.flash("message"),
+    username : loggedinUser.userName
+  });
+});
+
+
+app.get("/ownerPage", function(req, res) {
+  res.render("ownerPage",
+{username: loggedinUser.userName});
+});
+
+
+app.get("/customerPage", function(req, res) {
+  Parking.find({}, function(err, posts) {
+    res.render("customerPage", {
+      posts: posts,
+      username: loggedinUser.userName
+    });
+
+  });
+});
+
+
+app.get("/adminPage", function(req, res) {
+  res.render("adminPage",
+{username: loggedinUser.userName});
+});
+
+
+
+
+app.get('/users', function(req, res) {
+  User.find({}, function(err, foundUser) {
+    res.render("users", {
+      users: foundUser,
+      username : loggedinUser.userName
+    });
+
+  });
+});
+
 
 app.get("/cart/:parkingId", function(req, res) {
   const requestedParkingId = req.params.parkingId;
@@ -190,7 +263,7 @@ app.get("/cart/:parkingId", function(req, res) {
     if (err) {
       res.redirect("/customerPage");
     }
-    
+
     try {
       if (item) {
         if (loggedinUser === null) {
@@ -254,6 +327,128 @@ app.get("/edit/:id", function(req, res) {
 });
 
 
+//adminH
+app.get("/editt/:id", function(req, res) {
+  let parkingid = req.params.id;
+  Parking.findOne({
+    _id: parkingid,
+    seller_id: loggedinUser._id
+  }, function(err, parking) {
+    console.log("***********");
+    if (parking) {
+      res.render("editAdmin", {
+        message: req.flash("message"),
+        title: parking.title,
+        parking: parking._id,
+        message: req.flash("message"),
+        username : loggedinUser.userName
+      });
+      console.log("***********");
+    }
+  });
+});
+
+ //edit Status
+ app.get("/status/:id", function(req, res) {
+  let parkingid = req.params.id;
+  Parking.findOne({
+    _id: parkingid,
+    seller_id: loggedinUser._id
+  }, function(err, parking) {
+    console.log("***********");
+    if (parking) {
+      res.render("editStatus", {
+        message: req.flash("message"),
+        title: parking.title,
+        vehicle: parking.vehicle,
+        description: parking.description,
+        address: parking.address,
+        type: parking.type,
+        status: parking.status,
+        price: parking.price,
+        parking:parking,
+        message: req.flash("message"),
+        username : loggedinUser.userName
+      });
+      console.log("***********");
+    }
+  });
+});
+
+
+app.get("/posts/:postId", function(req, res) {
+
+  const requestedPostId = req.params.postId;
+
+  Parking.findOne({
+    _id: requestedPostId,
+  }, function(err, post) {
+
+    res.render("post", {
+      description: post.description,
+      title: post.title,
+      address: post.address,
+      type: post.type,
+      status: post.status,
+      price: post.price,
+      vehicle: post.vehicle,
+      username : loggedinUser.userName
+    });
+  });
+
+});
+
+
+app.get("/about", function(req, res) {
+  res.render("about", {
+    aboutContent: aboutContent,
+    username : loggedinUser.userName
+  });
+});
+
+
+
+
+//////////////////posts
+
+app.post("/sort", function(req, res) {
+  time = req.body.time
+});
+
+
+app.post("/cart/:parkingId", function(req, res) {
+
+
+  const requestedParkingId = req.params.parkingId;
+
+
+  console.log(requestedParkingId);
+  Parking.findOne({
+    _id: requestedParkingId
+  }, function(err, item) {
+    timet = req.body.time
+    pricet = item.price
+    console.log(timet);
+    console.log(pricet);
+    let amount = parseInt(timet)*parseInt(pricet);
+    res.render("cheakout", {
+      title: item.title,
+      description: item.description,
+      price: item.price,
+      username : loggedinUser.userName,
+      arrival:Arrivel,
+      time:req.body.time,
+      item: item,
+      amount: amount
+
+    });
+  });
+
+
+});
+
+
+
 app.post("/edit/:id", function(req, res) {
   console.log("***********");
   let parkingid = req.params.id;
@@ -300,33 +495,6 @@ app.post("/edit/:id", function(req, res) {
 });
 
 
-////////////adminH
-
-
-
-
-app.get("/editt/:id", function(req, res) {
-  let parkingid = req.params.id;
-  Parking.findOne({
-    _id: parkingid,
-    seller_id: loggedinUser._id
-  }, function(err, parking) {
-    console.log("***********");
-    if (parking) {
-      res.render("editAdmin", {
-        message: req.flash("message"),
-        title: parking.title,
-        parking: parking._id,
-        message: req.flash("message"),
-        username : loggedinUser.userName
-      });
-      console.log("***********");
-    }
-  });
-});
-
-
-
 app.post("/editt/:id", function(req, res) {
   console.log("***********");
   let parkingid = req.params.id;
@@ -371,38 +539,6 @@ app.post("/editt/:id", function(req, res) {
     }
   });
 });
-
-
-
- /////edit Status
-
-
-
- app.get("/status/:id", function(req, res) {
-   let parkingid = req.params.id;
-   Parking.findOne({
-     _id: parkingid,
-     seller_id: loggedinUser._id
-   }, function(err, parking) {
-     console.log("***********");
-     if (parking) {
-       res.render("editStatus", {
-         message: req.flash("message"),
-         title: parking.title,
-         vehicle: parking.vehicle,
-         description: parking.description,
-         address: parking.address,
-         type: parking.type,
-         status: parking.status,
-         price: parking.price,
-         parking:parking,
-         message: req.flash("message"),
-         username : loggedinUser.userName
-       });
-       console.log("***********");
-     }
-   });
- });
 
 
  app.post("/status/:id", function(req, res) {
@@ -547,7 +683,6 @@ app.post("/allunavailable", function(req, res) {
 });
 
 
-
 app.post("/allregular", function(req, res) {
   Parking.find({
     type: "Regular"
@@ -560,7 +695,6 @@ app.post("/allregular", function(req, res) {
 });
 
 
-
 app.post("/alldisabled", function(req, res) {
   Parking.find({
     type: "Disabled"
@@ -571,6 +705,7 @@ app.post("/alldisabled", function(req, res) {
     });
   });
 });
+
 
 app.post("/carSort", function(req, res) {
   Parking.find({
@@ -620,69 +755,6 @@ app.post("/motorcycleSort", function(req, res) {
 });
 
 
-
-
-
-app.get("/parkings", function(req, res) {
-
-  Parking.find({}, function(err, posts) {
-    res.render("parkings", {
-      posts: posts,
-      username : loggedinUser.userName
-    });
-
-  });
-});
-
-
-
-app.get("/ownerPage", function(req, res) {
-
-  Parking.find({
-    seller_id: loggedinUser._id
-  }, function(err, posts) {
-    res.render("ownerPage", {
-      posts: posts,
-      username : loggedinUser.userName
-    });
-
-  });
-});
-
-app.get("/home", function(req, res) {
-
-  Parking.find({}, function(err, posts) {
-    res.render("home", {
-      posts: posts,
-      username : loggedinUser.userName
-    });
-
-  });
-});
-
-
-
-app.get("/compose", function(req, res) {
-  res.render("compose",
-{username: loggedinUser.userName});
-});
-
-
-
-app.get("/composeAdmin", function(req, res) {
-  res.render("composeAdmin", {username: loggedinUser.userName});
-});
-
-
-
-app.get("/signup", function(req, res) {
-  res.render("signup", {
-    message: req.flash("message")
-  });
-});
-
-
-
 app.post('/login', function(req, res) {
   const password = req.body.password;
   User.findOne({
@@ -715,7 +787,6 @@ app.post('/login', function(req, res) {
     }
   });
 });
-
 
 
 app.post('/signup', checkNotAuthenticated, async (req, res) => {
@@ -775,16 +846,6 @@ app.post('/signup', checkNotAuthenticated, async (req, res) => {
 });
 
 
-
-app.get("/addUser", function(req, res) {
-  res.render("addUser", {
-    message: req.flash("message"),
-    username : loggedinUser.userName
-  });
-});
-
-
-
 app.post('/addUser', checkNotAuthenticated, async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -842,56 +903,6 @@ app.post('/addUser', checkNotAuthenticated, async (req, res) => {
 });
 
 
-
-app.get("/login", function(req, res) {
-  res.render("login", {
-    message: req.flash("message")
-  });
-});
-
-
-app.get("/ownerPage", function(req, res) {
-  res.render("ownerPage",
-{username: loggedinUser.userName});
-});
-
-
-
-
-app.get("/customerPage", function(req, res) {
-  Parking.find({}, function(err, posts) {
-    res.render("customerPage", {
-      posts: posts,
-      username: loggedinUser.userName
-    });
-
-  });
-});
-
-
-
-
-app.get("/adminPage", function(req, res) {
-  res.render("adminPage",
-{username: loggedinUser.userName});
-});
-
-
-
-
-app.get('/users', function(req, res) {
-  User.find({}, function(err, foundUser) {
-    res.render("users", {
-      users: foundUser,
-      username : loggedinUser.userName
-    });
-
-  });
-});
-
-
-
-
 app.post("/compose", function(req, res) {
   let post = new Parking({
     seller_id: loggedinUser._id,
@@ -912,8 +923,6 @@ app.post("/compose", function(req, res) {
 
   });
 });
-
-
 
 
 app.post("/composeAdmin", function(req, res) {
@@ -948,6 +957,7 @@ app.post("/delete", function(req, res) {
   res.redirect("users");
 });
 
+
 app.post("/postdelete", function(req, res) {
   const deleted = req.body.deleting;
   console.log(deleted);
@@ -958,40 +968,6 @@ app.post("/postdelete", function(req, res) {
   });
   res.redirect("parkings");
 });
-
-
-
-app.get("/posts/:postId", function(req, res) {
-
-  const requestedPostId = req.params.postId;
-
-  Parking.findOne({
-    _id: requestedPostId,
-  }, function(err, post) {
-
-    res.render("post", {
-      description: post.description,
-      title: post.title,
-      address: post.address,
-      type: post.type,
-      status: post.status,
-      price: post.price,
-      vehicle: post.vehicle,
-      username : loggedinUser.userName
-    });
-  });
-
-});
-
-
-app.get("/about", function(req, res) {
-  res.render("about", {
-    aboutContent: aboutContent,
-    username : loggedinUser.userName
-  });
-});
-
-
 
 
 function checkAuthenticated(req, res, next) {
