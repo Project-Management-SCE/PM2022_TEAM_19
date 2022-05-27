@@ -153,7 +153,6 @@ app.get("/map", function(req, res) {
 
 
 app.get("/sort", function(req, res) {
-
   res.render("sort");
 
 });
