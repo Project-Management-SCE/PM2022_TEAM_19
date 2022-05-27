@@ -16,7 +16,6 @@ pipeline {
         stage('Test') {
             steps {
                 dir("proj"){
-                    sh "npm install bcrypt"
                     sh "chmod +x -R ${env.WORKSPACE}"
                     sh "npm test"
                 }
