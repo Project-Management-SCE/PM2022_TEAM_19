@@ -190,6 +190,7 @@ app.get("/cart/:parkingId", function(req, res) {
     if (err) {
       res.redirect("/customerPage");
     }
+    
     try {
       if (item) {
         if (loggedinUser === null) {
