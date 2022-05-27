@@ -3,21 +3,10 @@ const request = require('supertest');
 const mongoose = require('mongoose');
 
 
-describe("Test Home Page", () => {
-  test("GET /", (done) => {
-    request(app)
-      .get("/")
-      .expect(200)
-      .end((err, res) => {
-        if (err) return done(err);
-        return done();
-      });
-  });
-  
-});
 
 
-describe("Test SignupPage", () => {
+
+describe("Test Signup Page", () => {
   test("GET /signup", (done) => {
     request(app)
       .get("/signup")
@@ -31,6 +20,18 @@ describe("Test SignupPage", () => {
 });
 
 
+describe("Test Login Page", () => {
+  test("GET /login", (done) => {
+    request(app)
+      .get("/login")
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        return done();
+      });
+  });
+  
+});
 
 // describe("Test Sort Page", () => {
 //   test("GET /sort", (done) => {
