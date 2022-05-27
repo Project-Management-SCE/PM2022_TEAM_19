@@ -17,7 +17,18 @@ describe("Test Home Page", () => {
 });
 
 
-
+describe("Test SignupPage", () => {
+  test("GET /signup", (done) => {
+    request(app)
+      .get("/signup")
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        return done();
+      });
+  });
+  
+});
 
 
 
