@@ -8,15 +8,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
+                dir(${env.WORKSPACE}/proj){
+                    sh 'npm install'
+                }
             }
         }
         stage('Test') {
             steps {
-                sh "chmod +x -R ${env.WORKSPACE}"
-                sh "cd proj"
-                sh "npm test"
-
+                dir(${env.WORKSPACE}/proj){
+                    sh "chmod +x -R ${env.WORKSPACE}"
+                    sh "npm test"
+                }
             }
         }
         stage('Deliver') {
