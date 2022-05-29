@@ -17,6 +17,7 @@
     "bootstrap": "^5.2.0-beta1",
     "bootstrap-icons": "^1.8.3",
     "connect-flash": "^0.1.1",
+    "coverage": "^0.4.1",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.8",
     "express": "^4.16.3",

@@ -30,9 +30,11 @@ pipeline {
 
         stage('Coverage') {
             steps {
-                sh 'npx nyc report --tset=lcov '
-
+                dir("proj"){
+                    sh 'npx nyc report --tset=lcov '
+                }
             }
+            
         }
     }
 }
