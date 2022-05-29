@@ -39,6 +39,7 @@ pipeline {
                stage('Quality') {
                     steps {
                         dir("proj"){
+                            sh 'npm install eslint-plugin-react@latest --save-dev'
                             sh 'npx eslint test.js'
                         }
                     }
