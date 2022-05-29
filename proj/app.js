@@ -4,15 +4,10 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-spawn('node', ['script.js'], {
-  env: {
-      NODE_ENV: 'production',
-      PATH: process.env.PATH
-  }
-})
+
 const express = require("express");
 const nyc = require("nyc");
-
+const { spawn } = require('child_process')
 const npx = require("npx");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
