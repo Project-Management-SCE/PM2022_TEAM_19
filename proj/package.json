@@ -23,32 +23,23 @@
     "express": "^4.16.3",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.2",
-    "format": "^0.2.2",
     "gamma": "^1.0.0",
-    "husky": "^8.0.1",
+    "gulp-pylint": "^0.0.3",
+    "http": "^0.0.1-security",
     "jest": "^28.1.0",
-    "lint-staged": "^12.4.2",
     "lodash": "^4.17.11",
     "mocha": "^10.0.0",
     "mongoose": "^5.2.8",
     "mongoose-int32": "^0.6.0",
     "nodemon": "^2.0.16",
-    "npx": "^3.0.0",
+    "npx": "^10.2.2",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
     "password-validator": "^5.2.1",
-    "qualscan": "^3.1.2",
-    "supertest": "^6.2.3",
-    "yarn": "^1.22.18"
+    "supertest": "^6.2.3"
   },
   "devDependencies": {
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6",
     "eslint": "^8.16.0",
-    "eslint-plugin-react": "^7.30.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^12.4.2",
-    "nyc": "15.1.0",
-    "prettier-standard": "^9.1.1"
+    "nyc": "15.1.0"
   }
 }

@@ -1,5 +1,5 @@
 //jshint esversion:6
-
+/* eslint-disable */
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -7,6 +7,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require("express");
 const nyc = require("nyc");
+const { spawn } = require('child_process')
+const npx = require("npx");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mocha = require("mocha");
@@ -36,7 +38,7 @@ const app = express();
 
 
 
-
+/* eslint-enable */
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
@@ -311,7 +313,6 @@ app.get("/edit/:id", function(req, res) {
         message: req.flash("message"),
         title: parking.title,
         parking: parking._id,
-        message: req.flash("message"),
         username : loggedinUser.userName
       });
     }
@@ -331,7 +332,6 @@ app.get("/editt/:id", function(req, res) {
         message: req.flash("message"),
         title: parking.title,
         parking: parking._id,
-        message: req.flash("message"),
         username : loggedinUser.userName
       });
     }
@@ -357,7 +357,6 @@ app.get("/editt/:id", function(req, res) {
         status: parking.status,
         price: parking.price,
         parking:parking,
-        message: req.flash("message"),
         username : loggedinUser.userName
       });
       console.log("***********");
@@ -821,7 +820,7 @@ app.post('/signup', checkNotAuthenticated, async (req, res) => {
         } else {
           req.flash("message", "password should 1 uppercase letter and minimum of 2 digits");
           res.redirect("/signup");
-        }
+        };
 
       } else {
         req.flash("message", "the user is already exist!");
@@ -878,7 +877,7 @@ app.post('/addUser', checkNotAuthenticated, async (req, res) => {
         } else {
           req.flash("message", "the password should have a max length of 15 characters, min of 1 uppercase letter and minimum of 2 digits");
           res.redirect("/addUser");
-        }
+        };
 
       } else {
         req.flash("message", "the user is already exist!");

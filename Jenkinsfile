@@ -34,7 +34,7 @@ pipeline {
                     sh 'npx nyc report --tset=lcov '
                 }
             }
-
+            
         }
         stage('ESLint') {
             steps {
