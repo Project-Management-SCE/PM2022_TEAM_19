@@ -36,13 +36,15 @@ pipeline {
             }
 
         }
-               stage('Quality') {
-                    steps {
-                        dir("proj"){
-                        
-                        }
-                    }
-
+        stage('ESLint') {
+            steps {
+                dir("proj"){
+                    sh 'npx eslint test.js'
+                    sh 'npx eslint server.js'
+                    sh 'npx eslint app.js'
                 }
+            }
+            
+        }
     }
 }
