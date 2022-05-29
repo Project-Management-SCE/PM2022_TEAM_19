@@ -7,8 +7,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require("express");
 const nyc = require("nyc");
-const { spawn } = require('child_process')
-const npx = require("npx");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mocha = require("mocha");
