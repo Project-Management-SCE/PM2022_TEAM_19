@@ -34,12 +34,15 @@ pipeline {
                     sh 'npx nyc report --tset=lcov '
                 }
             }
-            stage('Quality') {
-                        steps {
-                            dir("proj"){
-                                sh 'npx eslint test.js'
-                            }
-               }
+
         }
+               stage('Coverage') {
+                    steps {
+                        dir("proj"){
+                            sh 'npx eslint test.js'
+                        }
+                    }
+
+                }
     }
 }
