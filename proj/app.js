@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 const express = require("express");
+const nyc = require("nyc");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 var passport = require("passport");

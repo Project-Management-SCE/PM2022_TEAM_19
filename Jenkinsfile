@@ -27,5 +27,11 @@ pipeline {
                 sh 'pwd'
             }
         }
+
+        stage('Coverage') {
+            steps {
+                sh 'npx nyc mocha'
+            }
+        }
     }
 }
