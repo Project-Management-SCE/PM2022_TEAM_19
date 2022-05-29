@@ -30,8 +30,10 @@ pipeline {
 
         stage('Coverage') {
             steps {
+                sh 'npm ci'
                 sh 'npm install --save-dev nyc'
                 sh 'npx nyc mocha'
+
             }
         }
     }
