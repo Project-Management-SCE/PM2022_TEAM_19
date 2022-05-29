@@ -36,7 +36,7 @@ pipeline {
             }
 
         }
-               stage('Coverage') {
+               stage('Quality') {
                     steps {
                         dir("proj"){
                             sh 'npx eslint test.js'
