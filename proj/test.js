@@ -1,7 +1,7 @@
+/* eslint-disable */
 const app = require('./app');
 const request = require('supertest');
-const mongoose = require('mongoose');
-
+/* eslint-enable */
 
 describe("Test home Page", () => {
   test("GET /", (done) => {

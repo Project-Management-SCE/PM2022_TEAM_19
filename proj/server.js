@@ -1,6 +1,7 @@
+/* eslint-disable */
 const mongoose = require('mongoose');
 const app = require('./app.js')
-
+/* eslint-enable */
 mongoose.connect("mongodb+srv://adimazbarga:AdimAzbarga12@cluster0.jydbi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
   useNewUrlParser: true
 });

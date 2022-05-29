@@ -1,5 +1,5 @@
 //jshint esversion:6
-
+/* eslint-disable */
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -38,7 +38,7 @@ const app = express();
 
 
 
-
+/* eslint-enable */
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
@@ -313,7 +313,6 @@ app.get("/edit/:id", function(req, res) {
         message: req.flash("message"),
         title: parking.title,
         parking: parking._id,
-        message: req.flash("message"),
         username : loggedinUser.userName
       });
     }
@@ -333,7 +332,6 @@ app.get("/editt/:id", function(req, res) {
         message: req.flash("message"),
         title: parking.title,
         parking: parking._id,
-        message: req.flash("message"),
         username : loggedinUser.userName
       });
     }
@@ -359,7 +357,6 @@ app.get("/editt/:id", function(req, res) {
         status: parking.status,
         price: parking.price,
         parking:parking,
-        message: req.flash("message"),
         username : loggedinUser.userName
       });
       console.log("***********");
