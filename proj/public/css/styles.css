@@ -187,13 +187,9 @@ button {
 }
 
 button.publish {
-
   width: auto;
-
 }
 
-
-}
 
 ::placeholder {
   color: grey;

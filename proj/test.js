@@ -44,6 +44,20 @@ describe("Test Login Page", () => {
   
 });
 
+describe("Test map Page", () => {
+  test("GET /map", (done) => {
+    request(app)
+      .get("/map")
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        return done();
+      });
+  });
+  
+});
+
+
 // describe("Test Sort Page", () => {
 //   test("GET /sort", (done) => {
 //     request(app)

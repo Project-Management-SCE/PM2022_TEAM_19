@@ -11,21 +11,36 @@ list-type-ulli, .socials {
   padding: 0;
 }
 
-.alert-danger {
-  display: inline-block;
-  border-radius: 10px;
-  background-image: -webkit-linear-gradient(top, #f0f0f00%, #f0f0f0 100%) !important;
-  background-image: -o-linear-gradient(top, #f0f0f0 0%, #f0f0f0 100%) !important;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#f2dede), to(#e7c3c3)) !important;
-  background-image: linear-gradient(to bottom, #f2dede 0%, #f0f0f0 100%) !important;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff2dede', endColorstr='#ffe7c3c3', GradientType=0) ;
-  background-repeat: repeat-x!important;
-  border-color: #dca7a7!important;
+h3{
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
+
 .alert {
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  --bs-alert-bg: transparent;
+  --bs-alert-padding-x: 1rem;
+  --bs-alert-padding-y: 1rem;
+  --bs-alert-margin-bottom: 1rem;
+  --bs-alert-color: inherit;
+  --bs-alert-border-color: transparent;
+  --bs-alert-border: 1px solid var(--bs-alert-border-color);
+  --bs-alert-border-radius: 0.375rem;
+  position: relative;
+  margin-bottom: var(--bs-alert-margin-bottom);
+  color: var(--bs-alert-color);
+  background-color: var(--bs-alert-bg);
+  border: var(--bs-alert-border);
+  border-radius: var(--bs-alert-border-radius, 0);
+ 
+}
+
+.alert-danger {
+  --bs-alert-color: #664d03;
+  --bs-alert-bg: #fff3cd;
+  --bs-alert-border-color: #ffecb5;
+}
+.alert-warning .alert-link {
+  color: #523e02;
 }
 
 
@@ -117,12 +132,12 @@ h2 {
 }
 
 body {
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.8;
   color: #222;
   background: #f8f8f8;
-  font-weight: 400;
-  font-family: Poppins;
+  font-weight: 500;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .container {
@@ -248,7 +263,7 @@ figure {
 .signup-form {
   margin-left: 75px;
   margin-right: 75px;
-  padding-left: 34px;
+  padding-left: 30px;
 }
 
 .register-form {
@@ -314,6 +329,7 @@ input:focus:-moz-placeholder {
 .agree-term {
   display: inline-block;
   width: auto;
+  color: #222;
 }
 
 label {
@@ -426,3 +442,4 @@ label.valid:after {
   .signup-form, .signup-image, .signin-form, .signin-image {
     width: auto;
   }
+}

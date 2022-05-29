@@ -3,8 +3,6 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -106,7 +104,7 @@ var usernameschema = new passwordValidator();
 
 // Add properties to it
 passwordschema
-  .is().max(15) // Maximum length 25
+  .is().max(50) // Maximum length 25
   .has().uppercase() // Must have uppercase letters
   .has().digits(2) // Must have at least 2 digits
 // Validate against a password string
@@ -117,8 +115,7 @@ phoneschema
 
 
 usernameschema
-  .is().min(8) // Minimum length 10
-  .is().max(15) // Maximum length 25
+  .is().min(8) // Minimum length 8
   .has().not().spaces() // Should not have spaces
   .has().lowercase() // Must have lowercase letters
 
@@ -145,7 +142,7 @@ app.get("/", function(req, res) {
   res.render("homepage");
 });
 
-
+//
 app.get("/map", function(req, res) {
   res.render("map");
 
@@ -273,14 +270,9 @@ app.get("/cart/:parkingId", function(req, res) {
           seller_id: item.seller_id,
           item_id: item._id,
           Arrival: Arrivel,
-
-
         });
-        console.log("*************************");
-        console.log(Arrivel);
         order.save(function(err) {
           if (!err) {
-            console.log("*********aa**********");
             console.log(Arrivel);
             res.render("buy", {
               title: item.title,
@@ -290,11 +282,8 @@ app.get("/cart/:parkingId", function(req, res) {
               arrival:Arrivel,
               time:req.body.time,
               item:item
-
             });
           }
-
-          console.log("*************************");
         });
       }
 
@@ -311,7 +300,6 @@ app.get("/edit/:id", function(req, res) {
     _id: parkingid,
     seller_id: loggedinUser._id
   }, function(err, parking) {
-    console.log("***********");
     if (parking) {
       res.render("edit", {
         message: req.flash("message"),
@@ -320,7 +308,6 @@ app.get("/edit/:id", function(req, res) {
         message: req.flash("message"),
         username : loggedinUser.userName
       });
-      console.log("***********");
     }
   });
 });
@@ -333,7 +320,6 @@ app.get("/editt/:id", function(req, res) {
     _id: parkingid,
     seller_id: loggedinUser._id
   }, function(err, parking) {
-    console.log("***********");
     if (parking) {
       res.render("editAdmin", {
         message: req.flash("message"),
@@ -342,7 +328,6 @@ app.get("/editt/:id", function(req, res) {
         message: req.flash("message"),
         username : loggedinUser.userName
       });
-      console.log("***********");
     }
   });
 });
@@ -819,16 +804,16 @@ app.post('/signup', checkNotAuthenticated, async (req, res) => {
                 }
               });
             } else {
-              req.flash("message", "The phone should have a length of 10 digits of numbers");
+              req.flash("message", "phone number should have 10 digits");
               res.redirect("/signup");
             }
           } else {
-            req.flash("message", "The username should have a  Min length 8 and max 10 , no space , lowcase");
+            req.flash("message", "username should have for Min 8 letters,no spaces, lowcase");
             res.redirect("/signup");
           }
 
         } else {
-          req.flash("message", "the password should have a max length of 15 characters, min of 1 uppercase letter and minimum of 2 digits");
+          req.flash("message", "password should 1 uppercase letter and minimum of 2 digits");
           res.redirect("/signup");
         };
 
