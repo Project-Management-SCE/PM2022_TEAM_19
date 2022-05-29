@@ -10,7 +10,14 @@ list-type-ulli, .socials {
   margin: 0;
   padding: 0;
 }
+h1,h3,h5,h6{
+  font-family: 'Roboto', sans-serif;
+}
 
+
+h4,h3{
+  font-family: 'Josefin Sans', sans-serif;
+}
 h3{
   margin-top: 4px;
   margin-bottom: 4px;

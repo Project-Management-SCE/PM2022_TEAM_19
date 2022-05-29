@@ -55,18 +55,17 @@
 
 
 
-
 <form class="" action="/sort" method="post">
   <% posts.forEach(function(r) {%>
   <div class="box red">
     <table>
       <tr>
-        <td>
+        <th>
             <h2 name ="status"><%=r.status%>&nbsp </h2>
-        </td>
-        <td>
+        </th>
+        <th>
           <h2 name ="vehicle"><%=r.vehicle%></h2>
-        </td>
+        </th>
       </tr>
     </table>
     <h4 name ="description"> <%= r.description%></h4><br>
@@ -82,12 +81,6 @@
   <%})%>
 
 </form>
-
-
-
-
-
-
 
 
 

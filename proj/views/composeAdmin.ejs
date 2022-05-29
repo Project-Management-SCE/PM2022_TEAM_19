@@ -4,41 +4,62 @@
     <br>
     <form class="" action="/composeAdmin" method="post">
       <div class="form-group">
-        <label>Title</label>
-        <input class="form-control" type="text" name="postTitle" placeholder="Enter a Title">
+        <Table>
+          <tr>
+            <td>
+              <label>Title</label>
+              <input class="form-control" type="text" name="postTitle" placeholder="Enter a Title">
+            </td>
 
-        <label>Vehicle</label>
-        <select class="form-control" type="text" name="Vehicle" placeholder="Enter Vehicle">
-          <option value="car">Car</option>
-          <option value="bus">Bus</option>
-          <option value="truck">Truck </option>
-          <option value="motorcycle">Motorcycle</option>
-        </select>
+            <td>
+              <label>Vehicle</label>
+              <select class="form-control" type="text" name="Vehicle" placeholder="Enter Vehicle">
+                <option value="car">Car</option>
+                <option value="bus">Bus</option>
+                <option value="truck">Truck </option>
+                <option value="motorcycle">Motorcycle</option>
+              </select>
+      
+            </td>
+          </tr>
 
+          <tr>
+            <td>
+              <label>Description</label>
+              <textarea rows="2" cols="2" class="form-control" type="text" name="postDescription" placeholder="Enter a description"></textarea>
+            </td>
+            <td>
+              <label>Address</label>
+              <input class="form-control"  id="pac-input" type="text" name="place" placeholder="Enter a location" />
+            </td>
+          </tr>
 
-        <label>Description</label>
-        <textarea rows="4" cols="4" class="form-control" type="text" name="postDescription" placeholder="Enter a description"></textarea>
+          <tr>
+            <td>
+              <label>Type</label>
+              <select class="form-control" type="text" name="postType" placeholder="Enter type">
+                <option value="Regular"> Regular </option>
+                <option value="Disabled"> Disabled</option>
+              </select>
+            </td>
+            <td>
+              <label>Status</label>
+              <select class="form-control" type="text" name="postStatus" placeholder="Enter status">
+                <option value="Available"> Available </option>
+                <option value="Unavailable"> Unavailable</option>
+              </select>
+      
+            </td>
+          </tr>
 
-
-        <label>Address</label>
-        <input class="form-control"  id="pac-input" type="text" name="place" placeholder="Enter a location" />
-
-        <label>Type</label>
-        <select class="form-control" type="text" name="postType" placeholder="Enter type">
-          <option value="Regular"> Regular </option>
-          <option value="Disabled"> Disabled</option>
-        </select>
-
-
-        <label>Status</label>
-        <select class="form-control" type="text" name="postStatus" placeholder="Enter status">
-          <option value="Available"> Available </option>
-          <option value="Unavailable"> Unavailable</option>
-        </select>
-
-
-        <label>Price per Hour</label>
-        <input class="form-control" type="text" name="postPrice" placeholder="Enter price">
+          <tr>
+            <td>
+              <label>Price per Hour</label>
+              <input class="form-control" type="text" name="postPrice" placeholder="Enter price">
+            </td>
+          </tr>
+        </Table>
+        
 
       </div>
       <button class="publish btn btn-lg btn-danger hover-top btn-glow" type="submit" name="button">Publish</button>

@@ -1,4 +1,4 @@
-<%- include("partials/header", {username: username}); -%>
+<%- include("partials/adminH", {username: username}); -%>
 
 <style media="screen">
   h1 {
@@ -9,27 +9,54 @@
     color: #a5716f;
   }
 </style>
+<table>
 
-<h1>Title : </h1>
-<h3><%=title%></h3>
+  <h3><%=title%></h3>
+  <tr>
+    <td>
+      <h1>Parking's Status </h1>
+      <h3><%=status%></h3>
+    </td>
+    <td>
+      <h1>Vehicle type  </h1>
+      <h3><%=vehicle%></h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h1>Parking's Description  </h1>
+      <h3><%=description%></h3>
+    </td>
+    <td>
+      <h1>Parking's Adress </h1>
+      <h3><%=address%></h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h1>Parking's Type </h1>
+      <h3><%=type%></h3>
+    </td>
+    <td>
+      <h1> Parking's Price </h1>
+      <h3><%=price%>₪ per Hour</h3>
+    </td>
+  </tr>
+  
+</table>
+
 </p>
-<h1>Vehicle type : </h1>
-<h3><%=vehicle%></h3>
+
 </p>
-<h1>Parking's Description : </h1>
-<h3><%=description%></h3>
+
 </p>
-<h1>Parking's Adress :</h1>
-<h3><%=address%></h3>
+
 </p>
-<h1>Parking's Type :</h1>
-<h3><%=type%></h3>
+
 </p>
-<h1>Parking's Status :</h1>
-<h3><%=status%></h3>
+
 </p>
-<h1> Parking's Price :</h1>
-<h3><%=price%>₪ per Hour</h3>
+
 
 
 

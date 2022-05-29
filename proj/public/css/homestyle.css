@@ -84,8 +84,12 @@ h4, .h4 {
   font-size: calc(1.269rem + 0.228vw);
 }
 
-
-
+h2,h1,h5,h6{
+  font-family: 'Roboto', sans-serif;
+}
+h4,h3{
+  font-family: 'Josefin Sans', sans-serif;
+}
 h5, .h5 {
   font-size: 1.2rem;
 }

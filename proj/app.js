@@ -206,6 +206,8 @@ app.get("/composeAdmin", function(req, res) {
 });
 
 
+
+
 app.get("/addUser", function(req, res) {
   res.render("addUser", {
     message: req.flash("message"),
@@ -918,7 +920,7 @@ app.post("/composeAdmin", function(req, res) {
     type: req.body.postType,
     status: req.body.postStatus,
     price: req.body.postPrice,
-    vehicle: req.body.vehicle
+    vehicle: req.body.Vehicle
   });
 
   post.save(function(err) {

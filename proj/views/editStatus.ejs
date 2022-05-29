@@ -13,7 +13,7 @@
     <form class="" action="/status/<%=parking._id%>" method="post">
 
       <div class="form-group">
-        <h1>edit <%=title%>  parking</h1>
+        <h1>edit <%=title%>  </h1>
         <%if (message.length > 0){ %>
         <div class="alert alert-success" role="alert">
            <h4><%= message %></h4>
@@ -27,23 +27,38 @@
           <option value="Unavailable"> Unavailable</option>
         </select>
 
+        <table>
+          <tr>
+            <td>
+              <h2>Vehicle type  </h2>
+              <h3><%=parking.vehicle%></h3>
+            </td>
+            <td>
+              <h2>Parking's Description  </h2>
+              <h3><%=parking.description%></h3>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h2>Parking's Adress </h2>
+              <h3><%=parking.address%></h3>
+            </td>
+            <td>
+              <h2>Parking's Type </h2>
+              <h3><%=parking.type%></h3>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h2> Parking's Price </h2>
+              <h3><%=parking.price%>₪ per Hour</h3>
+      
+            </td>
+          </tr>
+        </table>
+    
 
-        <h1>Vehicle type : </h1>
-        <h3><%=parking.vehicle%></h3>
-        </p>
-        <h1>Parking's Description : </h1>
-        <h3><%=parking.description%></h3>
-        </p>
-        <h1>Parking's Adress :</h1>
-        <h3><%=parking.address%></h3>
-        </p>
-        <h1>Parking's Type :</h1>
-        <h3><%=parking.type%></h3>
-        </p>
-
-        <h1> Parking's Price :</h1>
-        <h3><%=parking.price%>₪ per Hour</h3>
-
+    
 
       </div>
       <button  class="publish btn btn-lg btn-danger hover-top btn-glow" name="button">Edit</button>

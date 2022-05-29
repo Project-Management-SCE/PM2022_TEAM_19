@@ -21,20 +21,26 @@
   <% users.forEach(function(user) {%>
   <form class="" action="/delete" method="post">
     <div class="item">
-      <button type="submit" value="<%= user._id %>" name="deleting">🗑️</button>
-      <p>
-      <h4>username :<h5><%= user.userName %> </h5>&nbsp;&nbsp;&nbsp;</h4>
-      <h4>email :<h5><%= user.email %> </h5>&nbsp;&nbsp;&nbsp;</h4>
-      <h4>phone :<h5><%= user.phone %> </h5>&nbsp;&nbsp;&nbsp;</h4>
-      <h4>password :<h5><%= user.password %> </h5>&nbsp;&nbsp;&nbsp;</h4>
-      </p>
+      <table>
+        <tr>
+          <th></th>
+          <th>username</th>
+          <th>email</th>
+          <th>phone</th>
+          <th>password</th>
+        </tr>
+        <tr>
+          <td> <button type="submit" value="<%= user._id %>" name="deleting">🗑️</button></td>
+          <td><%= user.userName %></td>
+          <td><%= user.email %></td>
+          <td><%= user.phone %></td>
+          <td><%= user.password %></td>
+        </tr>
+      </table>
+      
     </div>
     <% })%>
   </form>
 
-
-
-
-  
 </div>
 <%- include("partials/footer"); -%>

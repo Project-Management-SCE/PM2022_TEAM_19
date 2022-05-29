@@ -17,16 +17,27 @@
   <% posts.forEach(function(post) {%>
   <form class="" action="/postdelete" method="post">
     <div class="item">
-    
-      <button type="submit" value="<%= post._id %>" name="deleting">🗑️</button>
-      <p>
-      <h4>title :<h5><%= post.title %> </h5>&nbsp;&nbsp;&nbsp;</h4>
-      <h4>address :<h5><%= post.address %> </h5>&nbsp;&nbsp;&nbsp;</h4>
-      <h4>type :<h5><%= post.type %> </h5>&nbsp;&nbsp;&nbsp;</h4>
-      <h4>status :<h5><%= post.status %> </h5>&nbsp;&nbsp;&nbsp;</h4>
-      <h4>price :<h5><%= post.price %> </h5>&nbsp;&nbsp;&nbsp;</h4>
-
-      </p>
+    <table>
+      <tr>
+        <th></th>
+        <th>title</th>
+        <th>address</th>
+        <th>type</th>
+        <th>status</th>
+        <th>price</th>
+      </tr>
+      <tr>
+        <td> <button type="submit" value="<%= post._id %>" name="deleting">🗑️</button></td>
+        <td><%= post.title %></td>
+        <td><%= post.address %></td>
+        <td><%= post.type %></td>
+        <td><%= post.status %></td>
+        <td><%= post.price %> </td>
+      </tr>
+     
+    </table>
+     
+     
     </div>
     <% })%>
   </form>
