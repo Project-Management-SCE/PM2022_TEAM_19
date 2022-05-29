@@ -28,12 +28,4 @@ pipeline {
             }
         }
     }
-        stages {
-        stage('coverage') {
-            steps {
-                dir("proj"){
-                    sh 'npm i --save-dev nyc'
-                }
-            }
-        }
 }
