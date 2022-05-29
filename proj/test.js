@@ -1,7 +1,7 @@
 /* eslint-disable */
 const app = require('./app');
 const request = require('supertest');
-/* eslint-enable */
+
 
 describe("Test home Page", () => {
   test("GET /", (done) => {
@@ -85,3 +85,4 @@ describe("Test map Page", () => {
 // });
 
 
+/* eslint-enable */

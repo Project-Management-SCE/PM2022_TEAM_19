@@ -38,7 +38,7 @@ const app = express();
 
 
 
-/* eslint-enable */
+
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
@@ -976,3 +976,4 @@ function checkNotAuthenticated(req, res, next) {
 
 
 module.exports = app;
+/* eslint-enable */
