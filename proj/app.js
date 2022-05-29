@@ -9,6 +9,7 @@ const express = require("express");
 const nyc = require("nyc");
 const { spawn } = require('child_process')
 const npx = require("npx");
+const eslint = require("eslint");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mocha = require("mocha");
@@ -823,7 +824,7 @@ app.post('/signup', checkNotAuthenticated, async (req, res) => {
         } else {
           req.flash("message", "password should 1 uppercase letter and minimum of 2 digits");
           res.redirect("/signup");
-        };
+        }
 
       } else {
         req.flash("message", "the user is already exist!");
@@ -880,7 +881,7 @@ app.post('/addUser', checkNotAuthenticated, async (req, res) => {
         } else {
           req.flash("message", "the password should have a max length of 15 characters, min of 1 uppercase letter and minimum of 2 digits");
           res.redirect("/addUser");
-        };
+        }
 
       } else {
         req.flash("message", "the user is already exist!");
