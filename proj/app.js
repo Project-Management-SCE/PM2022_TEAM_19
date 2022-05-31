@@ -493,6 +493,7 @@ app.post("/editt/:id", function(req, res) {
   let parkingid = req.params.id;
   console.log(parkingid);
   console.log(parking.title)
+  console.log(parking.description)
   
   Parking.findOne({
     _id: parkingid
