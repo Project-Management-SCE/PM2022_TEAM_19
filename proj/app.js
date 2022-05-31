@@ -323,10 +323,14 @@ app.get("/edit/:id", function(req, res) {
 //adminH
 app.get("/editt/:id", function(req, res) {
   let parkingid = req.params.id;
+  console.log(parkingid)
+  console.log(loggedinUser._id)
   Parking.findOne({
     _id: parkingid,
-    seller_id: loggedinUser._id
+  
   }, function(err, parking) {
+    console.log(parking.title)
+    console.log(parking._id)
     if (parking) {
       res.render("editAdmin", {
         message: req.flash("message"),
@@ -588,6 +592,8 @@ app.post("/map", function(req, res) {
 
 
 app.post("/available", function(req, res) {
+  console.log(SearchLocation);
+  console.log(SearchVehicle);
   Parking.find({
     status: "Available",
     address: SearchLocation,
@@ -901,7 +907,7 @@ app.post("/compose", function(req, res) {
     type: req.body.postType,
     status: req.body.postStatus,
     price: req.body.postPrice,
-    vehicle: req.body.vehicle
+    vehicle: req.body.Vehicle
   });
 
 
