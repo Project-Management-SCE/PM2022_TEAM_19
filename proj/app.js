@@ -19,6 +19,7 @@ const flash = require("connect-flash");
 const session = require("express-session");
 var passwordValidator = require('password-validator');
 const mongoose = require('mongoose');
+const { faCommentsDollar } = require('@fortawesome/free-solid-svg-icons');
 
 //var foo = require('./foo.js');
 //var bar = require('../lib/bar.js');
@@ -541,6 +542,7 @@ app.post("/editt/:id", function(req, res) {
    console.log("***********");
    let parkingid = req.params.id;
    console.log(parkingid);
+   console.log(parking.seller_id)
    Parking.findOne({
      _id: parkingid
    }, function(err, parking) {
