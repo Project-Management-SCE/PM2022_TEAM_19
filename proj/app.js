@@ -544,6 +544,7 @@ app.post("/editt/:id", function(req, res) {
    console.log(parkingid);
    console.log(parking.seller_id)
    console.log(parking.type)
+   console.log(parking.vehicle)
    Parking.findOne({
      _id: parkingid
    }, function(err, parking) {
